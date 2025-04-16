@@ -10,7 +10,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    # Read current votes
+    with open("votes.json", "r") as f:
+        votes = json.load(f)
+    return render_template("index.html", result=None, vote_counts=votes)
+
 
 
 @app.route("/about")
@@ -33,6 +37,32 @@ def track():
         send_email(email, subject, result)
 
     return render_template("index.html", result=result)
+
+
+import json
+
+@app.route("/vote", methods=["POST"])
+def vote():
+    spot = request.form["spot"]
+
+    # Read current votes
+    with open("votes.json", "r") as f:
+        votes = json.load(f)
+
+    # Update count
+    if spot in votes:
+        votes[spot] += 1
+
+    # Save back to file
+    with open("votes.json", "w") as f:
+        json.dump(votes, f)
+
+    # Render the main page again, passing updated votes
+    return render_template("index.html", 
+                            result=None,
+                            vote_message=f"Thanks for voting for {spot}!",
+                            vote_counts=votes)
+
 
 
 if __name__ == "__main__":

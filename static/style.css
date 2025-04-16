@@ -140,3 +140,28 @@
     text-decoration: underline;
   }
   
+  .vote-section {
+    margin-top: 3em;
+    padding: 1.5em;
+    background-color: #f5fcff;
+    border-left: 6px solid #00796b;
+    border-radius: 10px;
+  }
+  
+  .vote-form {
+    margin-top: 1em;
+    display: flex;
+    gap: 1em;
+  }
+  
+  .vote-msg {
+    margin-top: 1em;
+    font-weight: 500;
+    color: #00796b;
+  }
+  
+  .vote-results ul {
+    margin-top: 1em;
+    list-style-type: none;
+  }
+  

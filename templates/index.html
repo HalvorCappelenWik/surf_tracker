@@ -43,6 +43,31 @@
 
             <button type="submit">Check Conditions</button>
         </form>
+        <div class="vote-section">
+            <h2>🗳️ Where do Nova students surf?</h2>
+            <form action="/vote" method="post" class="vote-form">
+              <select name="spot">
+                <option value="Ericeira">Ericeira</option>
+                <option value="Carcavelos">Carcavelos</option>
+                <option value="Nazaré">Nazaré</option>
+              </select>
+              <button type="submit">Vote</button>
+            </form>
+          
+            {% if vote_message %}
+              <p class="vote-msg">{{ vote_message }}</p>
+            {% endif %}
+          
+            <div class="vote-results">
+              <h3>Current votes:</h3>
+              <ul>
+                {% for spot, count in vote_counts.items() %}
+                  <li><strong>{{ spot }}:</strong> {{ count }} votes</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          
 
         {% if result %}
             <div class="result-card 
