@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from surf_alert import check_conditions
 from dotenv import load_dotenv
 from email_alert import send_email  
+import os
 
 load_dotenv()
 
@@ -35,4 +36,5 @@ def track():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Use Render's port or default locally
+    app.run(host="0.0.0.0", port=port)
