@@ -1,0 +1,18 @@
+<form action="/track" method="post">
+    <label for="beach">Select Beach:</label>
+    <select name="beach" id="beach" required>
+        <option value="Ericeira">Ericeira</option>
+        <option value="Nazare">Nazare</option>
+        <option value="Peniche">Peniche</option>
+    </select>
+
+    <label for="min_wave">Min Wave Height (m):</label>
+    <input type="number" name="min_wave" step="0.1" placeholder="e.g., 1.5" required>
+
+    <button type="submit">Check</button>
+</form>
+
+<!-- ADD THIS -->
+{% if result %}
+    <p><strong>{{ result }}</strong></p>
+{% endif %}
