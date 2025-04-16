@@ -1,18 +1,58 @@
-<form action="/track" method="post">
-    <label for="beach">Select Beach:</label>
-    <select name="beach" id="beach" required>
-        <option value="Ericeira">Ericeira</option>
-        <option value="Nazare">Nazare</option>
-        <option value="Peniche">Peniche</option>
-    </select>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Surf Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="app-container">
 
-    <label for="min_wave">Min Wave Height (m):</label>
-    <input type="number" name="min_wave" step="0.1" placeholder="e.g., 1.5" required>
+        <!-- Top right About link -->
+        <div class="top-bar">
+            <a href="{{ url_for('about') }}">About this project</a>
+        </div>
 
-    <button type="submit">Check</button>
-</form>
+        <h1>🌊 Surf Tracker</h1>
+        <p class="subtitle">Check live surf conditions at top Portuguese beaches</p>
 
-<!-- ADD THIS -->
-{% if result %}
-    <p><strong>{{ result }}</strong></p>
-{% endif %}
+        <form action="/track" method="post" class="surf-form">
+            <div class="form-row">
+                <label for="beach">Beach</label>
+                <select name="beach" id="beach" required>
+                    <option value="Ericeira">Ericeira</option>
+                    <option value="Nazare">Nazaré</option>
+                    <option value="Peniche">Peniche</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="min_wave">Min Wave Height (m)</label>
+                <input type="number" name="min_wave" step="0.1" placeholder="e.g. 1.5" required>
+            </div>
+
+            <div class="form-row">
+                <label for="email">Email for alerts (optional)</label>
+                <input type="email" name="email" placeholder="you@example.com">
+            </div>
+
+            <div class="form-row checkbox">
+                <input type="checkbox" name="notify" value="yes">
+                <label>Notify me if conditions are good</label>
+            </div>
+
+            <button type="submit">Check Conditions</button>
+        </form>
+
+        {% if result %}
+            <div class="result-card 
+                {% if '✅' in result %}good
+                {% elif '☑️' in result %}okay
+                {% else %}bad{% endif %}">
+                <pre>{{ result }}</pre>
+            </div>
+        {% endif %}
+
+    </div>
+</body>
+</html>
