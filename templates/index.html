@@ -6,78 +6,78 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="app-container">
+  <div class="app-container">
 
-        <!-- Top right About link -->
-        <div class="top-bar">
-            <a href="{{ url_for('about') }}">About this project</a>
-        </div>
+    <!-- Top Right Nav -->
+    <div class="top-bar">
+      <a href="{{ url_for('about') }}">About this project</a>
+    </div>
 
+    <!-- Main Content Area -->
+    <div class="two-column">
+
+      <!-- Left Column: Tracker Form -->
+      <div class="left-column">
         <h1>🌊 Surf Tracker</h1>
         <p class="subtitle">Check live surf conditions at top Portuguese beaches</p>
 
         <form action="/track" method="post" class="surf-form">
-            <div class="form-row">
-                <label for="beach">Beach</label>
-                <select name="beach" id="beach" required>
-                    <option value="Ericeira">Ericeira</option>
-                    <option value="Nazare">Nazaré</option>
-                    <option value="Peniche">Peniche</option>
-                </select>
-            </div>
-
-            <div class="form-row">
-                <label for="min_wave">Min Wave Height (m)</label>
-                <input type="number" name="min_wave" step="0.1" placeholder="e.g. 1.5" required>
-            </div>
-
-            <div class="form-row">
-                <label for="email">Email for alerts (optional)</label>
-                <input type="email" name="email" placeholder="you@example.com">
-            </div>
-
-            <div class="form-row checkbox">
-                <input type="checkbox" name="notify" value="yes">
-                <label>Notify me if conditions are good</label>
-            </div>
-
-            <button type="submit">Check Conditions</button>
-        </form>
-        <div class="vote-section">
-            <h2>🗳️ Where do Nova students surf?</h2>
-            <form action="/vote" method="post" class="vote-form">
-              <select name="spot">
-                <option value="Ericeira">Ericeira</option>
-                <option value="Carcavelos">Carcavelos</option>
-                <option value="Nazaré">Nazaré</option>
-              </select>
-              <button type="submit">Vote</button>
-            </form>
-          
-            {% if vote_message %}
-              <p class="vote-msg">{{ vote_message }}</p>
-            {% endif %}
-          
-            <div class="vote-results">
-              <h3>Current votes:</h3>
-              <ul>
-                {% for spot, count in vote_counts.items() %}
-                  <li><strong>{{ spot }}:</strong> {{ count }} votes</li>
-                {% endfor %}
-              </ul>
-            </div>
+          <div class="form-row">
+            <label for="beach">Beach</label>
+            <select name="beach" id="beach" required>
+              <option value="Ericeira">Ericeira</option>
+              <option value="Nazare">Nazaré</option>
+              <option value="Peniche">Peniche</option>
+            </select>
           </div>
-          
+
+          <div class="form-row">
+            <label for="min_wave">Min Wave Height (m)</label>
+            <input type="number" name="min_wave" step="0.1" placeholder="e.g. 1.5" required>
+          </div>
+
+          <div class="form-row">
+            <label for="email">Email for alerts (optional)</label>
+            <input type="email" name="email" placeholder="you@example.com">
+          </div>
+
+          <div class="form-row checkbox">
+            <input type="checkbox" name="notify" value="yes">
+            <label>Notify me if conditions are good</label>
+          </div>
+
+          <button type="submit">Check Conditions</button>
+        </form>
 
         {% if result %}
-            <div class="result-card 
-                {% if '✅' in result %}good
-                {% elif '☑️' in result %}okay
-                {% else %}bad{% endif %}">
-                <pre>{{ result }}</pre>
-            </div>
+          <div class="result-card 
+            {% if '✅' in result %}good
+            {% elif '☑️' in result %}okay
+            {% else %}bad{% endif %}">
+            <pre>{{ result }}</pre>
+          </div>
         {% endif %}
+      </div>
 
+      <!-- Right Column: Nova Info -->
+      <div class="right-column">
+        <h2>🧭 New to Nova? Where to Surf</h2>
+        <ul>
+          <li><strong>🏄 Ericeira:</strong> Nova’s weekend favorite. Chill town, consistent swell.</li>
+          <li><strong>🌊 Carcavelos:</strong> Easy train ride, popular after class.</li>
+          <li><strong>🌪 Nazaré:</strong> Great to watch — not to surf (unless you’re a superhero).</li>
+        </ul>
+
+        <h3>🏄‍♂️ Surfboard Rentals & Lessons</h3>
+        <ul>
+          <li><strong>Boardriders Ericeira</strong> – boards, wetsuits, and lessons (10% student discount!)</li>
+          <li><strong>Carcavelos Surf School</strong> – great for quick after-class sessions</li>
+          <li><strong>Magic Quiver</strong> – premium boards in Ericeira</li>
+        </ul>
+
+        <p style="margin-top: 1em;">💡 Many surf schools offer discounts if you show your Nova student card!</p>
+      </div>
     </div>
+  </div>
 </body>
 </html>
